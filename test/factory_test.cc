@@ -26,16 +26,17 @@ public:
 template <typename Type>
 Type example{};
 
-
 TEST_CASE("Test Factory method") {
+    using ohtoai::sugar::factory::ProductRegistrar;
+    using ohtoai::sugar::factory::ProductFactory;
     // Register
-    ohtoai::sugar::ProductRegistrar<Base, Derived1> reg1("d1_id");
-    ohtoai::sugar::ProductRegistrar<Base, Derived2> reg2("d2_id");
+    ProductRegistrar<Base, Derived1> reg1("d1_id");
+    ProductRegistrar<Base, Derived2> reg2("d2_id");
 
     // Create
-    auto derived1 = ohtoai::sugar::ProductFactory<Base>::instance().product("d1_id");
-    auto derived2 = ohtoai::sugar::ProductFactory<Base>::instance().product("d2_id");
-    auto illegal = ohtoai::sugar::ProductFactory<Base>::instance().product("illegal_id");
+    auto derived1 = ProductFactory<Base>::instance().product("d1_id");
+    auto derived2 = ProductFactory<Base>::instance().product("d2_id");
+    auto illegal = ProductFactory<Base>::instance().product("illegal_id");
 
     // Check
     REQUIRE(derived1->name() == example<Derived1>.name());
