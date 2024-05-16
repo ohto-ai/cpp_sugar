@@ -122,6 +122,20 @@ TEST_CASE("Pipe functor tests", "functor") {
         auto result = v | nop([&nop_called](const auto& v) { nop_called = true; });
         REQUIRE(result == v);
     }
+
+    SECTION("Test split") {
+        auto str_vec = "Hello, world!" | read_vector<std::string>;
+        REQUIRE(str_vec == std::vector<std::string>{ "Hello,", "world!" });
+
+        auto int_vec = "01 2 3 4 5 abc" | read_vector<int>;
+        REQUIRE(int_vec == std::vector<int>{ 1, 2, 3, 4, 5 });
+
+        auto double_vec = "1.1 2.2 3.3 4.4 5.5 xyz" | read_vector<double>;
+        REQUIRE(double_vec == std::vector<double>{ 1.1, 2.2, 3.3, 4.4, 5.5 });
+
+        auto char_vec = "Hello, world!" | read_vector<char>;
+        REQUIRE(char_vec == std::vector<char>{ 'H', 'e', 'l', 'l', 'o', ',', 'w', 'o', 'r', 'l', 'd', '!' });
+    }
 }
 
 TEST_CASE("Pipe tuple call tests", "tuple") {

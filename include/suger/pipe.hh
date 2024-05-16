@@ -137,6 +137,17 @@ namespace pipe {
             return std::apply(f, t);
             };
         };
+
+    // read_vector
+    template<typename T>
+    auto read_vector = [](const std::string& s) {
+        std::istringstream iss{ s };
+        std::vector<T> dst;
+        std::copy(std::istream_iterator<T>{iss},
+            std::istream_iterator<T>{},
+            std::back_insert_iterator<std::vector<T>>(dst));
+        return dst;
+        };
 } // namespace pipe
 
 } // namespace ohtoai::sugar
