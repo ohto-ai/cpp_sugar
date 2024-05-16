@@ -1,4 +1,4 @@
-#include <suger/brain_fuck.hh>
+#include <sugar/brain_fuck.hh>
 #include <catch2/catch.hpp>
 
 TEST_CASE("BrainFuck") {

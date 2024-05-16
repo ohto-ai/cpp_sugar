@@ -1,7 +1,9 @@
 #pragma once
 
-#ifndef OHTOAI_SUGER_FNV1A_HH
-#define OHTOAI_SUGER_FNV1A_HH
+#ifndef OHTOAI_SUGAR_FNV1A_HH
+#define OHTOAI_SUGAR_FNV1A_HH
+
+#include <cstdint>
 
 namespace ohtoai::sugar {
     namespace hash::fnv1a {
@@ -11,4 +13,4 @@ namespace ohtoai::sugar {
     }
 }
 
-#endif // OHTOAI_SUGER_FNV1A_HH
+#endif // OHTOAI_SUGAR_FNV1A_HH

@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef OHTOAI_SUGER_PIPE_HH
-#define OHTOAI_SUGER_PIPE_HH
+#ifndef OHTOAI_SUGAR_PIPE_HH
+#define OHTOAI_SUGAR_PIPE_HH
 
 #include <ostream>
 #include <algorithm>
@@ -151,4 +151,4 @@ namespace ohtoai::sugar {
     } // namespace pipe
 } // namespace ohtoai::sugar
 
-#endif // !OHTOAI_SUGER_PIPE_HH
+#endif // !OHTOAI_SUGAR_PIPE_HH

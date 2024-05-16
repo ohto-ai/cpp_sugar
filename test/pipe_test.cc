@@ -1,4 +1,4 @@
-#include <suger/pipe.hh>
+#include <sugar/pipe.hh>
 #include <catch2/catch.hpp>
 #include <iostream>
 #include <vector>
