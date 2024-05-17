@@ -1,5 +1,7 @@
 # CPP SUGAR
 
+[![Cross-platform CI](https://github.com/ohto-ai/cpp_sugar/actions/workflows/ci.yaml/badge.svg)](https://github.com/ohto-ai/cpp_sugar/actions/workflows/ci.yaml)
+
 ## sugar::pipe
 实现了管道操作符，并添加了一些常用的函数。
 
