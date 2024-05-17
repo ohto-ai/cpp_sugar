@@ -48,7 +48,6 @@ jobs:
         unix_workspace_path=$(echo "${{ github.workspace }}" | sed 's/\\/\//g')
         echo "build-output-dir=${unix_workspace_path}/build" >> "$GITHUB_OUTPUT"
         echo "test-output-dir=${unix_workspace_path}/build/test" >> "$GITHUB_OUTPUT"
-        echo "build-parallel=8" >> "$GITHUB_OUTPUT"
     - name: Config
       shell: bash
       run: |
@@ -56,7 +55,7 @@ jobs:
     - name: Build and Test
       shell: bash
       run: |
-        cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }} --target ${{ matrix.build_target }} -j${{ steps.strings.outputs.build-parallel }}
+        cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }} --target ${{ matrix.build_target }} -j
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
       if: ${{ failure() || github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
