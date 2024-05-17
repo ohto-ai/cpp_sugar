@@ -28,7 +28,6 @@ namespace ohtoai::sugar {
         auto filter(F&& f) {
             return [f = std::forward<decltype(f)>(f)](auto&& v) {
                 auto vc = v;
-                //auto it = std::remove_if(std::begin(vc), std::end(vc), std::not_fn(f));
                 auto it = std::remove_if(std::begin(vc), std::end(vc), std::not_fn(f));
                 vc.erase(it, std::end(vc));
                 return vc;
@@ -148,6 +147,18 @@ namespace ohtoai::sugar {
                 std::back_insert_iterator<std::vector<T>>(dst));
             return dst;
             };
+
+        // join
+        auto join = [](const std::string& sep = "") {
+            return [sep](const auto& v) {
+                std::ostringstream oss;
+                if (!v.empty()) {
+                    std::copy(std::begin(v), std::end(v) - 1, std::ostream_iterator<std::string>(oss, sep.c_str()));
+                    oss << v.back();
+                }
+                return oss.str();
+            };
+        };
     } // namespace pipe
 } // namespace ohtoai::sugar
 

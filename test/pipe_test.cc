@@ -123,7 +123,7 @@ TEST_CASE("Pipe functor tests", "functor") {
         REQUIRE(result == v);
     }
 
-    SECTION("Test split") {
+    SECTION("Test read_vector") {
         auto str_vec = "Hello, world!" | read_vector<std::string>;
         REQUIRE(str_vec == std::vector<std::string>{ "Hello,", "world!" });
 
@@ -135,6 +135,14 @@ TEST_CASE("Pipe functor tests", "functor") {
 
         auto char_vec = "Hello, world!" | read_vector<char>;
         REQUIRE(char_vec == std::vector<char>{ 'H', 'e', 'l', 'l', 'o', ',', 'w', 'o', 'r', 'l', 'd', '!' });
+    }
+
+    SECTION("Test join") {
+        std::vector<std::string> v{ "Hello", "world", "!" };
+        REQUIRE((v | join()) == "Helloworld!");
+        REQUIRE((v | join(" ")) == "Hello world !");
+        REQUIRE((v | join(", ")) == "Hello, world, !");
+
     }
 }
 
