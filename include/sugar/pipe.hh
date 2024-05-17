@@ -6,6 +6,8 @@
 #include <ostream>
 #include <algorithm>
 #include <functional>
+#include <iterator>
+#include <sstream>
 
 namespace ohtoai::sugar {
     namespace pipe {
