@@ -11,6 +11,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_library(cpp_sugar INTERFACE)
+add_library(ohtoai::cpp_sugar ALIAS cpp_sugar)
 target_include_directories(cpp_sugar INTERFACE include)
 
 if (NOT subproject)
