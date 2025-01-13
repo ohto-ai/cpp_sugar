@@ -1,12 +1,12 @@
 #pragma once
 
-#ifndef OHTOAI_STRING_POOL
-#define OHTOAI_STRING_POOL
+#ifndef OHTOAI_SUGAR_STRING_POOL_HH
+#define OHTOAI_SUGAR_STRING_POOL_HH
 
 #include <string>
 #include <unordered_set >
 
-namespace ohtoai::util {
+namespace ohtoai::sugar {
     class string_pool {
     public:
         string_pool(size_t initial_capacity = 1024) {
@@ -44,4 +44,4 @@ namespace ohtoai::util {
 
 }
 
-#endif // !OHTOAI_STRING_POOL
+#endif // !OHTOAI_SUGAR_STRING_POOL_HH

@@ -12,3 +12,4 @@ _deps
 build
 out
 .vs
+folder-alias.json
