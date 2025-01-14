@@ -4,7 +4,7 @@
 #define OHTOAI_SUGAR_STRING_POOL_HH
 
 #include <string>
-#include <unordered_set >
+#include <unordered_set>
 
 namespace ai::sugar {
     class string_pool {
