@@ -27,8 +27,8 @@ template <typename Type>
 Type example{};
 
 TEST_CASE("Test Factory method") {
-    using ohtoai::sugar::factory::ProductRegistrar;
-    using ohtoai::sugar::factory::ProductFactory;
+    using ai::sugar::factory::ProductRegistrar;
+    using ai::sugar::factory::ProductFactory;
     // Register
     ProductRegistrar<Base, Derived1> reg1("d1_id");
     ProductRegistrar<Base, Derived2> reg2("d2_id");

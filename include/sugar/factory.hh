@@ -9,7 +9,7 @@
 #include <vector>
 #include <algorithm>
 
-namespace ohtoai::sugar {
+namespace ai::sugar {
     namespace factory {
         // Base class, product registration template interface class
         template <typename ProductType_t>
@@ -86,6 +86,6 @@ namespace ohtoai::sugar {
             }
         };
     } // namespace factory
-} // namespace ohtoai::sugar
+} // namespace ai::sugar
 
 #endif // !OHTOAI_SUGAR_FACTORY_HH

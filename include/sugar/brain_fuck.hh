@@ -6,7 +6,7 @@
 #include <iostream>
 #include <type_traits>
 
-namespace ohtoai::sugar {
+namespace ai::sugar {
     namespace funny::bf {
         template<size_t N>
         class Stream {

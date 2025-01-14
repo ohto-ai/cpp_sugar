@@ -3,7 +3,7 @@
 
 TEST_CASE("Test fnv1a") {
     SECTION("Test fnv1a hash") {
-        using namespace ohtoai::sugar::hash::fnv1a;
+        using namespace ai::sugar::hash::fnv1a;
 
         REQUIRE(fnv1a_32("hello") == 0x4f9f2cab);
         REQUIRE(fnv1a_32("world") == 0x37a3e893);

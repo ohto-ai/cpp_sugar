@@ -9,7 +9,7 @@
 #include <iterator>
 #include <sstream>
 
-namespace ohtoai::sugar {
+namespace ai::sugar {
     namespace pipe {
         // operator|
         template <typename Arg, typename Fun>
@@ -162,6 +162,6 @@ namespace ohtoai::sugar {
             };
         };
     } // namespace pipe
-} // namespace ohtoai::sugar
+} // namespace ai::sugar
 
 #endif // !OHTOAI_SUGAR_PIPE_HH

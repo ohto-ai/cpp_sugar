@@ -5,7 +5,7 @@
 #include <array>
 
 TEST_CASE("Pipe operator tests", "pipe") {
-    using ohtoai::sugar::pipe::operator|;
+    using ai::sugar::pipe::operator|;
 
     SECTION("Test pipe for basic types") {
         auto add_one = [](int x) { return x + 1; };
@@ -26,7 +26,7 @@ TEST_CASE("Pipe operator tests", "pipe") {
 }
 
 TEST_CASE("Pipe functor tests", "functor") {
-    using namespace ohtoai::sugar::pipe;
+    using namespace ai::sugar::pipe;
 
     SECTION("Test filter") {
         auto is_even = [](int x) { return x % 2 == 0; };
@@ -147,7 +147,7 @@ TEST_CASE("Pipe functor tests", "functor") {
 }
 
 TEST_CASE("Pipe tuple call tests", "tuple") {
-    using namespace ohtoai::sugar::pipe;
+    using namespace ai::sugar::pipe;
 
     SECTION("Test tuple call") {
         auto add = [](int x, int y) { return x + y; };
@@ -184,14 +184,14 @@ TEST_CASE("Pipe tuple call tests", "tuple") {
 }
 
 TEST_CASE("Pipe make_packet tests", "make_packet") {
-    using ohtoai::sugar::pipe::make_packet;
-    using ohtoai::sugar::pipe::tuple_as_args;
+    using ai::sugar::pipe::make_packet;
+    using ai::sugar::pipe::tuple_as_args;
 
     SECTION("Test make_packet") {
         auto add_one = [](int x) { return x + 1; };
         auto square = [](int x) { return x * x; };
 
-        auto packet = ohtoai::sugar::pipe::make_packet(add_one, square);
+        auto packet = ai::sugar::pipe::make_packet(add_one, square);
         REQUIRE((1 | packet) == 4);
         REQUIRE((2 | packet) == 9);
         REQUIRE((3 | packet) == 16);

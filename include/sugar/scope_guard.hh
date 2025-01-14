@@ -4,7 +4,7 @@
 
 #include <functional>
 
-namespace ohtoai::sugar {
+namespace ai::sugar {
     namespace detail {
         #if __cplusplus >= 202002L
             struct scope_guard {
@@ -39,6 +39,6 @@ namespace ohtoai::sugar {
     }
 
     using detail::scope_guard;
-} // namespace ohtoai
+} // namespace ai
 
 #endif // !OHTOAI_SUGAR_SCOPE_GUARD_HH

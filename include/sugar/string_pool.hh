@@ -6,7 +6,7 @@
 #include <string>
 #include <unordered_set >
 
-namespace ohtoai::sugar {
+namespace ai::sugar {
     class string_pool {
     public:
         string_pool(size_t initial_capacity = 1024) {
