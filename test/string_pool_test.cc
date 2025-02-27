@@ -21,4 +21,12 @@ TEST_CASE("Test string pool") {
         auto sv2 = pool.intern(std::string_view("Hello"));
         REQUIRE(sv1 == sv2);
     }
+
+    SECTION("Test intern strings") {
+        auto sv1 = pool.intern("Hello");
+        auto sv2 = pool.intern(std::string("Hello"));
+        auto sv3 = pool.intern(std::string_view("Hello"));
+        REQUIRE(sv1 == sv2);
+        REQUIRE(sv1 == sv3);
+    }
 }
