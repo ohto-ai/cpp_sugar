@@ -15,7 +15,7 @@
 实现 `fnv1a` 哈希函数
 
 ## sugar::string_pool
-实现建议的字符串池
+实现简易的字符串池
 
 ## sugar::scope_guard
 实现简易的作用域保护
