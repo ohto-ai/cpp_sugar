@@ -4,27 +4,25 @@
 #define OHTOAI_SUGAR_STRING_POOL_HH
 
 #include <string>
+#include <string_view>
 #include <unordered_set>
 
 namespace ai::sugar {
+    // Interns strings so that equal strings share a single allocation.
+    // Returned string_view objects remain valid for the lifetime of the pool.
     class string_pool {
     public:
-        string_pool(size_t initial_capacity = 1024) {
-            pool.reserve(initial_capacity);
+        explicit string_pool(size_t initial_capacity = 1024) {
+            pool_.reserve(initial_capacity);
         }
 
-        std::string_view intern(const std::string& str) {
-            return *pool.emplace(str).first;
-        }
-
+        // Insert str into the pool (if not already present) and return a stable view of it
         std::string_view intern(std::string_view str) {
-            return *pool.emplace(std::string(str)).first;
+            return *pool_.emplace(str).first;
         }
 
-        std::string_view intern(const char* str) {
-            return *pool.emplace(str).first;
-        }
     private:
+        // Transparent hash/equality to enable heterogeneous lookup (e.g., with string_view) in C++20 and later
         struct string_hash {
             using is_transparent = void;
             std::size_t operator()(std::string_view sv) const noexcept {
@@ -38,10 +36,10 @@ namespace ai::sugar {
                 return lhs == rhs;
             }
         };
-    private:
-        std::unordered_set<std::string, string_hash, string_equal> pool;
+
+        std::unordered_set<std::string, string_hash, string_equal> pool_;
     };
 
-}
+} // namespace ai::sugar
 
 #endif // !OHTOAI_SUGAR_STRING_POOL_HH
