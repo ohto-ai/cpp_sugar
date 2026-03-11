@@ -11,7 +11,7 @@
 
 namespace ai::sugar {
     namespace factory {
-        // Base class, product registration template interface class
+        // Abstract registrar interface; each concrete product type provides one instance
         template <typename ProductType_t>
         class IProductRegistrar {
         public:
@@ -23,7 +23,7 @@ namespace ai::sugar {
             IProductRegistrar& operator=(const IProductRegistrar&) = delete;
         };
 
-        // Factory template class for getting and registering product objects
+        // Singleton factory that owns the registry of named product creators
         template <typename ProductType_t>
         class ProductFactory {
         public:
@@ -32,32 +32,28 @@ namespace ai::sugar {
                 return instance;
             }
 
-            // Product registration
-            void registerProduct(IProductRegistrar<ProductType_t>* registrar, std::string name) {
+            // Register a product creator under the given name
+            void registerProduct(IProductRegistrar<ProductType_t>* registrar, const std::string& name) {
                 productRegistry_.emplace(name, registrar);
             }
 
-            // Based on the name, get the corresponding specific product object
-            std::shared_ptr<ProductType_t> product(std::string name) {
-                if (productRegistry_.find(name) != productRegistry_.end())
-                    return productRegistry_.at(name)->createProduct();
-                else
-                    return nullptr;
+            // Create and return the product registered under name, or nullptr if not found
+            std::shared_ptr<ProductType_t> product(const std::string& name) const {
+                auto it = productRegistry_.find(name);
+                return it != productRegistry_.end() ? it->second->createProduct() : nullptr;
             }
 
-            bool hasProduct(std::string name) const {
+            bool hasProduct(const std::string& name) const {
                 return productRegistry_.find(name) != productRegistry_.end();
             }
 
-            std::vector<std::string> getProductNames() {
+            std::vector<std::string> getProductNames() const {
                 std::vector<std::string> keys;
-
+                keys.reserve(productRegistry_.size());
                 std::transform(
-                    productRegistry_.begin(),
-                    productRegistry_.end(),
+                    productRegistry_.begin(), productRegistry_.end(),
                     std::back_inserter(keys),
-                    [](const typename std::map<std::string, IProductRegistrar<ProductType_t>*>::value_type& pair) {return pair.first; });
-
+                    [](const auto& pair) { return pair.first; });
                 return keys;
             }
 
@@ -67,21 +63,21 @@ namespace ai::sugar {
             ProductFactory(const ProductFactory&) = delete;
             ProductFactory& operator=(const ProductFactory&) = delete;
 
-            // Save the registered products. Key: product name, value: product type
+            // Registry mapping product name → registrar pointer
             std::map<std::string, IProductRegistrar<ProductType_t>*> productRegistry_;
         };
 
-        // Product Registration template class for creating concrete products and registering products from the factory
-        template <typename ProductType_t, typename ProductImpl_t, typename = typename std::enable_if<std::is_base_of<ProductType_t, ProductImpl_t>::value>::type>
+        // Concrete registrar: self-registers with the factory on construction.
+        // ProductImpl_t must be derived from ProductType_t.
+        template <typename ProductType_t, typename ProductImpl_t,
+            typename = std::enable_if_t<std::is_base_of_v<ProductType_t, ProductImpl_t>>>
         class ProductRegistrar : public IProductRegistrar<ProductType_t> {
         public:
-            // The constructor, used to register the product to the factory, can only show the call
-            explicit ProductRegistrar(std::string name) {
-                // Register the product to the factory through the factory singleton
+            explicit ProductRegistrar(const std::string& name) {
                 ProductFactory<ProductType_t>::instance().registerProduct(this, name);
             }
-            // Create a pointer to a concrete product object
-            std::shared_ptr<ProductType_t> createProduct() {
+
+            std::shared_ptr<ProductType_t> createProduct() override {
                 return std::make_shared<ProductImpl_t>();
             }
         };
