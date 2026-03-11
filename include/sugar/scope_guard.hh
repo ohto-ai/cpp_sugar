@@ -4,11 +4,14 @@
 #define OHTOAI_SUGAR_SCOPE_GUARD_HH
 
 #include <functional>
+#include <tuple>
+#include <type_traits>
+#include <utility>
 
 namespace ai::sugar {
     namespace detail {
 #if __cplusplus >= 202002L
-        // C++20 version: type-erased via std::function, supports arbitrary callables
+        // C++20 version: type-erased via std::function, supports arbitrary copy-constructible callables
         struct scope_guard {
             std::function<void()> f;
 

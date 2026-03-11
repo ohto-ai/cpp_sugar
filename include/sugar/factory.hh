@@ -3,11 +3,12 @@
 #ifndef OHTOAI_SUGAR_FACTORY_HH
 #define OHTOAI_SUGAR_FACTORY_HH
 
+#include <algorithm>
 #include <map>
 #include <memory>
 #include <string>
+#include <type_traits>
 #include <vector>
-#include <algorithm>
 
 namespace ai::sugar {
     namespace factory {

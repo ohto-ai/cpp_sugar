@@ -4,6 +4,7 @@
 #define OHTOAI_SUGAR_STRING_POOL_HH
 
 #include <string>
+#include <string_view>
 #include <unordered_set>
 
 namespace ai::sugar {
@@ -21,7 +22,7 @@ namespace ai::sugar {
         }
 
     private:
-        // Transparent hash/equality so the set can be looked up with string_view
+        // Transparent hash/equality to enable heterogeneous lookup (e.g., with string_view) in C++20 and later
         struct string_hash {
             using is_transparent = void;
             std::size_t operator()(std::string_view sv) const noexcept {

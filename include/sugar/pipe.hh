@@ -8,6 +8,10 @@
 #include <functional>
 #include <iterator>
 #include <sstream>
+#include <string>
+#include <tuple>
+#include <type_traits>
+#include <vector>
 
 namespace ai::sugar {
     // Pipe-style functional composition utilities.
@@ -135,7 +139,7 @@ namespace ai::sugar {
             return std::vector<T>(std::istream_iterator<T>{iss}, std::istream_iterator<T>{});
         };
 
-        // Join string elements of a range with sep as separator
+        // Join string elements of a random-access range with sep as separator
         inline auto join = [](const std::string& sep = "") {
             return [sep](const auto& v) {
                 std::ostringstream oss;
